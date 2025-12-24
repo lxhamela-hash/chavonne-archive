@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHAVONNE | THE ARCHIVE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter:wght@200;300;400;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #ffffff;
+            --accent: #737373;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            letter-spacing: -0.01em;
+            scroll-behavior: smooth;
+        }
+        .serif { font-family: 'Bodoni Moda', serif; }
+        .news-font { font-family: 'Playfair Display', serif; }
+        
+        /* Grain and Texture Overlay */
+        .texture-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 100;
+        }
+
+        /* Marquee Animation */
+        .marquee {
+            white-space: nowrap;
+            overflow: hidden;
+            display: flex;
+            gap: 2rem;
+            animation: marquee 30s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .fade-in {
+            animation: fadeIn 1.5s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            background: #171717;
+        }
+        
+        .clipping-border {
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 1rem;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .img-bw {
+            filter: grayscale(100%);
+            transition: filter 0.8s ease;
+        }
+        .img-bw:hover {
+            filter: grayscale(0%);
+        }
+
+        /* Hide Scrollbar */
+        ::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="selection:bg-white selection:text-black">
+    <div class="texture-overlay"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 p-8 flex justify-between items-start mix-blend-difference">
+        <div>
+            <h1 class="text-2xl font-light tracking-[0.2em] serif">CHAVONNE</h1>
+            <p class="text-[8px] tracking-[0.4em] uppercase opacity-60">Cape Town / Global Archive</p>
+        </div>
+        <div class="flex flex-col items-end gap-2">
+            <a href="#shop" class="text-[10px] uppercase tracking-widest hover:opacity-50 transition">The Archive</a>
+            <a href="#identity" class="text-[10px] uppercase tracking-widest hover:opacity-50 transition">Identity</a>
+            <a href="#footer" class="text-[10px] uppercase tracking-widest hover:opacity-50 transition">Journal</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="h-screen flex flex-col justify-center items-center relative px-6 overflow-hidden">
+        <div class="absolute inset-0 z-0 overflow-hidden opacity-30 flex items-center justify-center">
+            <!-- Background wallpaper of Chavonne's posters/clippings -->
+            <div class="grid grid-cols-3 gap-8 w-[120%] transform -rotate-6 grayscale">
+                <div class="clipping-border h-96 overflow-hidden">
+                    <img src="6296.jpg" class="w-full h-full object-cover opacity-50" alt="Archive Backdrop">
+                </div>
+                <div class="clipping-border h-[500px] flex items-center justify-center relative">
+                    <img src="6542.jpg" class="w-full h-full object-cover opacity-30" alt="Archive Backdrop">
+                    <span class="absolute text-6xl serif opacity-20 tracking-tighter">KHOISAN BEAUTY</span>
+                </div>
+                <div class="clipping-border h-80 overflow-hidden">
+                    <img src="6328.jpg" class="w-full h-full object-cover opacity-50" alt="Archive Backdrop">
+                </div>
+            </div>
+        </div>
+
+        <div class="z-10 text-center fade-in">
+            <h2 class="text-[14vw] md:text-[12vw] serif leading-none mb-4 italic font-light">Chavonne.</h2>
+            <div class="flex justify-center gap-6 md:gap-12 text-[10px] uppercase tracking-[0.5em] opacity-80 mt-8">
+                <span>Martial Artist</span>
+                <span>Intellectual</span>
+                <span>Nurturer</span>
+            </div>
+        </div>
+
+        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4">
+            <div class="w-px h-16 bg-gradient-to-b from-transparent to-white/40"></div>
+            <span class="text-[9px] uppercase tracking-[0.3em] opacity-40">Series No. 001</span>
+        </div>
+    </section>
+
+    <!-- Brand Duality Section -->
+    <section id="identity" class="py-40 px-6 max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-12 gap-12 items-center">
+            <div class="md:col-span-5 space-y-12">
+                <div class="space-y-4">
+                    <h3 class="text-xs uppercase tracking-widest text-neutral-500">The Philosophy</h3>
+                    <p class="text-3xl md:text-4xl serif leading-tight">"A search for meaning through the lens of modern femininity."</p>
+                </div>
+                <div class="news-font italic text-lg opacity-70 border-l border-white/20 pl-8 space-y-4 leading-relaxed">
+                    <p>She is a black belt who moves with the softness of a nurturing spirit. Chavonne is the mystery that remains after the shutter clicks—a photographer who sees the world in layers of history and hope.</p>
+                    <p class="text-sm not-italic uppercase tracking-tighter opacity-100 mt-6">Searching for what is near. Looking for what is far.</p>
+                </div>
+            </div>
+            <div class="md:col-span-7 flex justify-end">
+                <div class="w-full md:w-4/5 aspect-[4/5] image-container group shadow-2xl">
+                    <!-- Featured Image 01 -->
+                    <img src="6541.jpg" class="w-full h-full object-cover img-bw group-hover:scale-105 transition-transform duration-1000" alt="Chavonne Portrait">
+                    <div class="absolute bottom-4 left-4 text-[8px] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
+                        Chavonne / Cape Town Archive
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Archive Shop -->
+    <section id="shop" class="py-32 bg-white text-black">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-baseline mb-24 gap-4">
+                <h2 class="text-6xl md:text-7xl serif italic font-light">The Archive</h2>
+                <div class="flex gap-4 items-center">
+                    <span class="h-px w-20 bg-black/20"></span>
+                    <p class="text-[10px] uppercase tracking-widest font-bold">Series 01: Photography & Motion</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-24">
+                <!-- Product 01 -->
+                <div class="space-y-8 group">
+                    <div class="aspect-square bg-[#f5f5f5] flex items-center justify-center p-6 md:p-12 overflow-hidden">
+                        <!-- Oversized Tee Concept -->
+                        <div class="w-full h-full bg-white shadow-xl relative transition-transform duration-700 group-hover:scale-[1.02] flex items-center justify-center">
+                            <!-- Printing Chavonne's specific photography on the shirt -->
+                            <div class="w-2/3 aspect-square bg-neutral-900 overflow-hidden relative">
+                                 <img src="6354.jpg" class="w-full h-full object-cover grayscale" alt="T-Shirt Print">
+                                 <div class="absolute inset-0 bg-black/10"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 class="text-xl serif italic">Archive Print Tee 01</h4>
+                            <p class="text-[10px] uppercase tracking-widest opacity-60">"Landscape 01" / Boxy Fit Streetwear</p>
+                        </div>
+                        <span class="text-lg font-light">R 950</span>
+                    </div>
+                </div>
+
+                <!-- Product 02 -->
+                <div class="space-y-8 group mt-0 md:mt-40">
+                    <div class="aspect-square bg-[#f5f5f5] flex items-center justify-center p-6 md:p-12 overflow-hidden">
+                        <div class="w-full h-full bg-white shadow-xl relative transition-transform duration-700 group-hover:scale-[1.02] flex items-center justify-center">
+                            <div class="w-1/2 aspect-[3/4] bg-neutral-900 overflow-hidden relative">
+                                 <img src="6331.jpg" class="w-full h-full object-cover grayscale" alt="T-Shirt Print">
+                                 <div class="absolute inset-0 bg-black/10"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h4 class="text-xl serif italic">Archive Print Tee 02</h4>
+                            <p class="text-[10px] uppercase tracking-widest opacity-60">"Solitude" / Heavyweight Jersey</p>
+                        </div>
+                        <span class="text-lg font-light">R 950</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Narrative Section -->
+    <section class="py-40 px-6 max-w-4xl mx-auto text-center">
+        <div class="aspect-video mb-12 overflow-hidden clipping-border">
+            <img src="6225.jpg" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000" alt="Action Shot">
+        </div>
+        <p class="news-font text-2xl md:text-3xl italic leading-relaxed opacity-90">
+            "To be a black belt is to understand that power is quiet. To be a photographer is to understand that truth is found in the shadows."
+        </p>
+        <p class="text-[9px] uppercase tracking-[0.5em] mt-8 opacity-40">— CHAVONNE</p>
+    </section>
+
+    <!-- Banner -->
+    <section class="py-12 border-y border-white/10 bg-black overflow-hidden">
+        <div class="marquee">
+            <span class="text-5xl serif font-light opacity-20 uppercase tracking-widest">Progressive Femininity</span>
+            <span class="text-5xl serif font-light opacity-20 uppercase tracking-widest">Contemporary Mind</span>
+            <span class="text-5xl serif font-light opacity-20 uppercase tracking-widest">Global South Vision</span>
+            <span class="text-5xl serif font-light opacity-20 uppercase tracking-widest">Chavonne</span>
+            <span class="text-5xl serif font-light opacity-20 uppercase tracking-widest">Khoisan Beauty</span>
+        </div>
+    </section>
+
+    <!-- Footer / Journal -->
+    <footer id="footer" class="py-40 px-6">
+        <div class="max-w-xl mx-auto text-center space-y-12">
+            <div class="space-y-4">
+                <span class="text-[10px] uppercase tracking-[0.3em] opacity-40">Join The Search</span>
+                <h3 class="text-4xl serif">Subscribe to the archive.</h3>
+            </div>
+            <div class="relative group">
+                <input type="text" placeholder="ENTER YOUR EMAIL" class="w-full bg-transparent border-b border-white/20 py-4 text-xs tracking-widest focus:outline-none focus:border-white transition-colors uppercase">
+                <button class="absolute right-0 bottom-4 text-[10px] font-bold tracking-widest opacity-50 hover:opacity-100">SUBMIT</button>
+            </div>
+            
+            <div class="pt-24 grid grid-cols-2 gap-8 grayscale opacity-40">
+                <img src="6334.jpg" class="w-full h-40 object-cover" alt="Journal Photo">
+                <img src="6540.jpg" class="w-full h-40 object-cover" alt="Journal Photo">
+            </div>
+
+            <div class="pt-20 flex flex-col md:flex-row justify-between items-center text-[8px] uppercase tracking-[0.4em] opacity-30 gap-4">
+                <span>© 2024 THE CHAVONNE ARCHIVE</span>
+                <div class="flex gap-8">
+                    <a href="#">Instagram</a>
+                    <a href="#">TikTok</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
+
