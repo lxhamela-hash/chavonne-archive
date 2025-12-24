@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chavonne Archive</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .gallery-item {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .gallery-item-info {
+            padding: 15px;
+            background: #f8f9fa;
+        }
+        
+        .gallery-item-info h3 {
+            color: #333;
+            font-size: 1em;
+            margin-bottom: 5px;
+        }
+        
+        .gallery-item-info p {
+            color: #666;
+            font-size: 0.9em;
+        }
+        
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 40px;
+            opacity: 0.8;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 90%;
+            max-height: 90vh;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 35px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover {
+            color: #bbb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📸 Chavonne Archive</h1>
+            <p>A collection of memories and moments</p>
+        </header>
+        
+        <div class="gallery">
+            <div class="gallery-item" onclick="openModal(this)">
+                <img src="IMG-20251223-WA0018.jpg" alt="Archive Image 1">
+                <div class="gallery-item-info">
+                    <h3>Memory 1</h3>
+                    <p>IMG-20251223-WA0018.jpg</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal(this)">
+                <img src="IMG-20251223-WA0028.jpg" alt="Archive Image 2">
+                <div class="gallery-item-info">
+                    <h3>Memory 2</h3>
+                    <p>IMG-20251223-WA0028.jpg</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal(this)">
+                <img src="IMG-20251223-WA0061.jpg" alt="Archive Image 3">
+                <div class="gallery-item-info">
+                    <h3>Memory 3</h3>
+                    <p>IMG-20251223-WA0061.jpg</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal(this)">
+                <img src="IMG-20251223-WA0075.jpg" alt="Archive Image 4">
+                <div class="gallery-item-info">
+                    <h3>Memory 4</h3>
+                    <p>IMG-20251223-WA0075.jpg</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal(this)">
+                <img src="IMG-20251223-WA0084.jpg" alt="Archive Image 5">
+                <div class="gallery-item-info">
+                    <h3>Memory 5</h3>
+                    <p>IMG-20251223-WA0084.jpg</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal(this)">
+                <img src="IMG-20251223-WA0088.jpg" alt="Archive Image 6">
+                <div class="gallery-item-info">
+                    <h3>Memory 6</h3>
+                    <p>IMG-20251223-WA0088.jpg</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal(this)">
+                <img src="IMG-20251223-WA0095.jpg" alt="Archive Image 7">
+                <div class="gallery-item-info">
+                    <h3>Memory 7</h3>
+                    <p>IMG-20251223-WA0095.jpg</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal(this)">
+                <img src="IMG-20251223-WA0098.jpg" alt="Archive Image 8">
+                <div class="gallery-item-info">
+                    <h3>Memory 8</h3>
+                    <p>IMG-20251223-WA0098.jpg</p>
+                </div>
+            </div>
+            
+            <div class="gallery-item" onclick="openModal(this)">
+                <img src="1766568271212.jpg" alt="Archive Image 9">
+                <div class="gallery-item-info">
+                    <h3>Memory 9</h3>
+                    <p>1766568271212.jpg</p>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2025 Chavonne Archive. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <!-- Modal for image viewing -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+    
+    <script>
+        function openModal(element) {
+            const modal = document.getElementById("imageModal");
+            const modalImg = document.getElementById("modalImage");
+            const img = element.querySelector("img");
+            
+            modal.style.display = "block";
+            modalImg.src = img.src;
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById("imageModal");
+            modal.style.display = "none";
+        }
+        
+        // Close modal when clicking outside the image
+        window.onclick = function(event) {
+            const modal = document.getElementById("imageModal");
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html>
