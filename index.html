@@ -3,276 +3,236 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chavonne Archive</title>
+    <title>CHAVONNE | THE ARCHIVE</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter:wght@200;300;400;600&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg-color: #0a0a0a;
+            --text-color: #ffffff;
+            --accent: #737373;
         }
-
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Inter', sans-serif;
+            letter-spacing: -0.01em;
+            scroll-behavior: smooth;
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        header {
-            text-align: center;
-            color: white;
-            margin-bottom: 50px;
-            animation: fadeIn 0.8s ease-in;
-        }
-
-        header h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        header p {
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
-
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-
-        .gallery-item {
-            background: white;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .gallery-item-content {
-            padding: 20px;
-        }
-
-        .gallery-item-content h3 {
-            color: #667eea;
-            margin-bottom: 10px;
-            font-size: 1.3em;
-        }
-
-        .gallery-item-content p {
-            color: #666;
-            line-height: 1.6;
-            font-size: 0.95em;
-        }
-
-        .lightbox {
-            display: none;
+        .serif { font-family: 'Bodoni Moda', serif; }
+        .news-font { font-family: 'Playfair Display', serif; }
+        
+        .texture-overlay {
             position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.9);
-            animation: fadeIn 0.3s ease;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.04;
+            pointer-events: none;
+            z-index: 100;
         }
 
-        .lightbox-content {
-            position: relative;
-            margin: auto;
-            height: 100%;
+        .marquee {
+            white-space: nowrap;
+            overflow: hidden;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            gap: 2rem;
+            animation: marquee 40s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
         }
 
-        .lightbox-content img {
-            max-width: 90%;
-            max-height: 90%;
-            object-fit: contain;
+        .fade-in {
+            animation: fadeIn 1.5s ease-out forwards;
         }
-
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 40px;
-            color: white;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s ease;
-        }
-
-        .close-btn:hover {
-            color: #667eea;
-        }
-
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        footer {
-            text-align: center;
-            color: white;
-            padding: 20px;
-            margin-top: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        .img-bw {
+            filter: grayscale(100%);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .img-bw:hover {
+            filter: grayscale(0%);
+            transform: scale(1.02);
         }
 
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2em;
-            }
-
-            .gallery {
-                grid-template-columns: 1fr;
-            }
-
-            .close-btn {
-                font-size: 30px;
-                right: 20px;
-            }
+        .clipping-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
+            padding: 2rem;
         }
+
+        ::-webkit-scrollbar { display: none; }
     </style>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>Chavonne Archive</h1>
-            <p>Moments captured in time</p>
-        </header>
+<body class="selection:bg-white selection:text-black">
+    <div class="texture-overlay"></div>
 
-        <div class="gallery">
-            <div class="gallery-item" onclick="openLightbox('IMG-20251223-WA0018.jpg')">
-                <img src="IMG-20251223-WA0018.jpg" alt="Gallery Image 1">
-                <div class="gallery-item-content">
-                    <h3>Moment 1</h3>
-                    <p>A cherished memory from the archive</p>
-                </div>
-            </div>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 p-6 md:p-10 flex justify-between items-start mix-blend-difference">
+        <div>
+            <h1 class="text-2xl font-light tracking-[0.2em] serif">CHAVONNE</h1>
+            <p class="text-[8px] tracking-[0.4em] uppercase opacity-60">Cape Town / Global Archive</p>
+        </div>
+        <div class="hidden md:flex flex-col items-end gap-2">
+            <a href="#shop" class="text-[10px] uppercase tracking-widest hover:opacity-50 transition">The Archive</a>
+            <a href="#identity" class="text-[10px] uppercase tracking-widest hover:opacity-50 transition">Identity</a>
+            <a href="#journal" class="text-[10px] uppercase tracking-widest hover:opacity-50 transition">Journal</a>
+        </div>
+    </nav>
 
-            <div class="gallery-item" onclick="openLightbox('IMG-20251223-WA0028.jpg')">
-                <img src="IMG-20251223-WA0028.jpg" alt="Gallery Image 2">
-                <div class="gallery-item-content">
-                    <h3>Moment 2</h3>
-                    <p>A cherished memory from the archive</p>
-                </div>
-            </div>
-
-            <div class="gallery-item" onclick="openLightbox('IMG-20251223-WA0061.jpg')">
-                <img src="IMG-20251223-WA0061.jpg" alt="Gallery Image 3">
-                <div class="gallery-item-content">
-                    <h3>Moment 3</h3>
-                    <p>A cherished memory from the archive</p>
-                </div>
-            </div>
-
-            <div class="gallery-item" onclick="openLightbox('IMG-20251223-WA0075.jpg')">
-                <img src="IMG-20251223-WA0075.jpg" alt="Gallery Image 4">
-                <div class="gallery-item-content">
-                    <h3>Moment 4</h3>
-                    <p>A cherished memory from the archive</p>
-                </div>
-            </div>
-
-            <div class="gallery-item" onclick="openLightbox('IMG-20251223-WA0084.jpg')">
-                <img src="IMG-20251223-WA0084.jpg" alt="Gallery Image 5">
-                <div class="gallery-item-content">
-                    <h3>Moment 5</h3>
-                    <p>A cherished memory from the archive</p>
-                </div>
-            </div>
-
-            <div class="gallery-item" onclick="openLightbox('IMG-20251223-WA0088.jpg')">
-                <img src="IMG-20251223-WA0088.jpg" alt="Gallery Image 6">
-                <div class="gallery-item-content">
-                    <h3>Moment 6</h3>
-                    <p>A cherished memory from the archive</p>
-                </div>
-            </div>
-
-            <div class="gallery-item" onclick="openLightbox('IMG-20251223-WA0095.jpg')">
-                <img src="IMG-20251223-WA0095.jpg" alt="Gallery Image 7">
-                <div class="gallery-item-content">
-                    <h3>Moment 7</h3>
-                    <p>A cherished memory from the archive</p>
-                </div>
-            </div>
-
-            <div class="gallery-item" onclick="openLightbox('IMG-20251223-WA0098.jpg')">
-                <img src="IMG-20251223-WA0098.jpg" alt="Gallery Image 8">
-                <div class="gallery-item-content">
-                    <h3>Moment 8</h3>
-                    <p>A cherished memory from the archive</p>
-                </div>
-            </div>
-
-            <div class="gallery-item" onclick="openLightbox('1766568271212.jpg')">
-                <img src="1766568271212.jpg" alt="Gallery Image 9">
-                <div class="gallery-item-content">
-                    <h3>Moment 9</h3>
-                    <p>A cherished memory from the archive</p>
-                </div>
+    <!-- Hero Section -->
+    <section class="h-screen flex flex-col justify-center items-center relative px-6 overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-20 flex items-center justify-center">
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-8 w-[110%] transform -rotate-3">
+                <img src="6296.jpg" class="w-full grayscale opacity-40 rounded-sm" alt="Archive Backdrop">
+                <img src="6542.jpg" class="w-full grayscale opacity-40 rounded-sm mt-20" alt="Archive Backdrop">
+                <img src="6328.jpg" class="w-full grayscale opacity-40 rounded-sm" alt="Archive Backdrop">
             </div>
         </div>
 
-        <footer>
-            <p>&copy; 2025 Chavonne Archive. All rights reserved.</p>
-        </footer>
-    </div>
+        <div class="z-10 text-center fade-in">
+            <span class="text-[10px] uppercase tracking-[0.8em] opacity-40 mb-4 block">Est. 2024</span>
+            <h2 class="text-[16vw] md:text-[12vw] serif leading-none italic font-light tracking-tighter">Chavonne.</h2>
+            <div class="flex justify-center gap-4 md:gap-12 text-[9px] uppercase tracking-[0.4em] opacity-70 mt-10">
+                <span>Martial Artist</span>
+                <span class="opacity-20">/</span>
+                <span>Intellectual</span>
+                <span class="opacity-20">/</span>
+                <span>Nurturer</span>
+            </div>
+        </div>
+    </section>
 
-    <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-        <div class="lightbox-content" onclick="event.stopPropagation()">
-            <span class="close-btn" onclick="closeLightbox()">&times;</span>
-            <img id="lightbox-img" src="" alt="Full size image">
+    <!-- Identity Duality -->
+    <section id="identity" class="py-32 px-6 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-20 items-center">
+            <div class="order-2 md:order-1">
+                <div class="relative group overflow-hidden shadow-2xl">
+                    <img src="6541.jpg" class="w-full aspect-[3/4] object-cover img-bw" alt="Chavonne Portrait">
+                    <div class="absolute top-4 left-4 bg-black/50 backdrop-blur-md p-2">
+                        <p class="text-[8px] tracking-widest uppercase">File No. 6541 / Identity</p>
+                    </div>
+                </div>
+            </div>
+            <div class="order-1 md:order-2 space-y-10">
+                <h3 class="text-xs uppercase tracking-[0.3em] text-neutral-500">The Paradox</h3>
+                <p class="text-4xl md:text-5xl serif leading-[1.1] italic">"The most beautiful things are those the camera cannot fully see."</p>
+                <div class="clipping-card">
+                    <p class="news-font text-lg leading-relaxed opacity-80">
+                        Beneath the chic exterior lies the iron resolve of a martial artist. Chavonne represents the ability to be both the blade and the flower—an intellectual act of rebellion in a world that demands noise.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Archive Grid -->
+    <section id="shop" class="py-32 bg-white text-black">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-20 border-b border-black/10 pb-8">
+                <div>
+                    <h2 class="text-5xl md:text-7xl serif italic">The Archive</h2>
+                    <p class="text-[10px] uppercase tracking-widest mt-4">Series 01: Physical Artifacts</p>
+                </div>
+                <p class="hidden md:block text-[9px] uppercase tracking-widest max-w-[200px] text-right">A curated collection of visual storytelling through wearable art.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
+                <!-- Item 1 -->
+                <div class="space-y-6 group">
+                    <div class="aspect-[4/5] bg-neutral-100 flex items-center justify-center p-12 overflow-hidden cursor-crosshair">
+                        <div class="w-full h-full bg-white shadow-2xl relative flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
+                            <img src="6354.jpg" class="w-3/4 grayscale opacity-90" alt="T-Shirt Concept">
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h4 class="text-xl serif italic font-medium">Landscape Fragment Tee</h4>
+                            <p class="text-[9px] uppercase tracking-widest opacity-50 italic">"I am not lost; I am just exploring."</p>
+                        </div>
+                        <button class="px-6 py-2 border border-black text-[10px] uppercase tracking-widest hover:bg-black hover:text-white transition">Acquire</button>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="space-y-6 group md:mt-32">
+                    <div class="aspect-[4/5] bg-neutral-100 flex items-center justify-center p-12 overflow-hidden cursor-crosshair">
+                        <div class="w-full h-full bg-white shadow-2xl relative flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
+                            <img src="6331.jpg" class="w-1/2 aspect-[4/5] object-cover grayscale opacity-90" alt="T-Shirt Concept">
+                        </div>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <h4 class="text-xl serif italic font-medium">Solitude Study Tee</h4>
+                            <p class="text-[9px] uppercase tracking-widest opacity-50 italic">"Gentleness is the highest form of power."</p>
+                        </div>
+                        <button class="px-6 py-2 border border-black text-[10px] uppercase tracking-widest hover:bg-black hover:text-white transition">Acquire</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee Banner -->
+    <div class="py-10 border-y border-white/10 bg-black overflow-hidden">
+        <div class="marquee">
+            <span class="text-4xl serif font-light opacity-30 uppercase tracking-[0.2em]">Khoisan Beauty</span>
+            <span class="text-4xl serif font-light opacity-30 uppercase tracking-[0.2em]">Intellectual Search</span>
+            <span class="text-4xl serif font-light opacity-30 uppercase tracking-[0.2em]">Cape Town Heritage</span>
+            <span class="text-4xl serif font-light opacity-30 uppercase tracking-[0.2em]">Martial Spirit</span>
         </div>
     </div>
 
-    <script>
-        function openLightbox(imageSrc) {
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-            lightboxImg.src = imageSrc;
-            lightbox.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        }
+    <!-- Journal Section -->
+    <section id="journal" class="py-32 px-6 max-w-5xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-10">
+            <div class="md:col-span-1 space-y-6">
+                <img src="6225.jpg" class="w-full grayscale hover:grayscale-0 transition-all duration-700" alt="Journal Image">
+                <p class="text-[10px] uppercase tracking-widest opacity-40">Entry 001: The Studio</p>
+            </div>
+            <div class="md:col-span-2 flex flex-col justify-center">
+                <h3 class="text-xs uppercase tracking-[0.4em] mb-6 text-neutral-500">Journal Entry</h3>
+                <p class="news-font text-3xl md:text-4xl italic leading-snug">"Meaning isn't found; it is built, brick by quiet brick. I carry my ancestors in my posture and the future in my eyes."</p>
+            </div>
+        </div>
+    </section>
 
-        function closeLightbox() {
-            const lightbox = document.getElementById('lightbox');
-            lightbox.style.display = 'none';
-            document.body.style.overflow = 'auto';
-        }
-
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeLightbox();
-            }
-        });
-    </script>
+    <!-- Footer -->
+    <footer class="py-32 border-t border-white/5 bg-[#050505]">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12">
+            <div class="col-span-2 space-y-6">
+                <h2 class="text-2xl serif tracking-widest uppercase">CHAVONNE</h2>
+                <p class="text-xs opacity-40 leading-relaxed max-w-sm">A global archive dedicated to the exploration of femininity, intellectualism, and the martial arts mindset. Based in Cape Town, searching for the infinite.</p>
+            </div>
+            <div class="space-y-4">
+                <h4 class="text-[10px] uppercase tracking-widest font-bold">Inquiries</h4>
+                <div class="flex flex-col gap-2 text-xs opacity-60">
+                    <a href="#" class="hover:opacity-100">Archive Requests</a>
+                    <a href="#" class="hover:opacity-100">Press</a>
+                    <a href="#" class="hover:opacity-100">Collaborations</a>
+                </div>
+            </div>
+            <div class="space-y-4">
+                <h4 class="text-[10px] uppercase tracking-widest font-bold">Connection</h4>
+                <div class="flex flex-col gap-2 text-xs opacity-60">
+                    <a href="#" class="hover:opacity-100">Instagram</a>
+                    <a href="#" class="hover:opacity-100">TikTok</a>
+                    <a href="#" class="hover:opacity-100">Vimeo</a>
+                </div>
+            </div>
+        </div>
+        <div class="mt-32 text-center text-[8px] uppercase tracking-[0.5em] opacity-20">
+            © 2024 The Chavonne Archive. All Rights Reserved.
+        </div>
+    </footer>
 </body>
 </html>
+
